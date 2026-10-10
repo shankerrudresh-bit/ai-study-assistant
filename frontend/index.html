@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101522">
+  <title>StudySpace — AI Study Assistant</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-backdrop" class="sidebar-backdrop" hidden></div>
+
+    <aside id="sidebar" class="sidebar" aria-label="Study assistant sidebar">
+      <a class="brand" href="/" aria-label="StudySpace home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>StudySpace</span>
+      </a>
+
+      <button id="new-chat-button" class="new-chat-button" type="button">
+        <span class="button-symbol" aria-hidden="true">＋</span>
+        <span>New conversation</span>
+      </button>
+
+      <div class="sidebar-section">
+        <p class="sidebar-heading">QUICK STUDY</p>
+        <button class="sidebar-prompt" type="button" data-prompt="Explain this topic in simple words: ">
+          <span aria-hidden="true">✳</span>
+          <span>Explain a topic</span>
+        </button>
+        <button class="sidebar-prompt" type="button" data-prompt="Summarize this material into the most important points: ">
+          <span aria-hidden="true">≡</span>
+          <span>Summarize material</span>
+        </button>
+        <button class="sidebar-prompt" type="button" data-prompt="Create clear revision notes about: ">
+          <span aria-hidden="true">▤</span>
+          <span>Make revision notes</span>
+        </button>
+        <button class="sidebar-prompt" type="button" data-prompt="Create 5 multiple-choice questions about this topic, with four options and an answer key: ">
+          <span aria-hidden="true">☷</span>
+          <span>Practice with MCQs</span>
+        </button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="connection-card">
+          <span class="connection-dot" aria-hidden="true"></span>
+          <div>
+            <p class="connection-label">Backend status</p>
+            <p id="connection-status">Checking connection...</p>
+          </div>
+        </div>
+        <p class="sidebar-footnote">Made for curious minds.<br>One small step at a time.</p>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <button
+          id="menu-button"
+          class="icon-button menu-button"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          <span aria-hidden="true">☰</span>
+        </button>
+        <div class="topbar-title">
+          <span class="topbar-eyebrow">YOUR PERSONAL STUDY PARTNER</span>
+          <span class="topbar-name">AI Study Assistant</span>
+        </div>
+        <div class="model-badge">
+          <span class="model-dot" aria-hidden="true"></span>
+          Gemini
+        </div>
+      </header>
+
+      <section class="chat-layout" aria-label="Study chat">
+        <div class="welcome" id="welcome-panel">
+          <div class="welcome-icon" aria-hidden="true">✦</div>
+          <p class="eyebrow">LEARN AT YOUR OWN PACE</p>
+          <h1>What are we learning<br><span>today?</span></h1>
+          <p class="welcome-description">
+            Ask a question, explore a tricky topic, or get help preparing for your next exam.
+          </p>
+          <div class="suggestion-grid" aria-label="Example questions">
+            <button class="suggestion-card" type="button" data-prompt="Explain what a computer network is in simple words.">
+              <span class="suggestion-icon blue" aria-hidden="true">⌘</span>
+              <span><strong>Understand a topic</strong><small>Explain computer networks simply</small></span>
+              <span class="suggestion-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="suggestion-card" type="button" data-prompt="Create concise revision notes about the OSI model.">
+              <span class="suggestion-icon violet" aria-hidden="true">▤</span>
+              <span><strong>Make revision notes</strong><small>Turn a subject into key points</small></span>
+              <span class="suggestion-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="suggestion-card" type="button" data-prompt="Create 5 multiple-choice questions about database normalization, with four options and an answer key.">
+              <span class="suggestion-icon amber" aria-hidden="true">☷</span>
+              <span><strong>Test your knowledge</strong><small>Practice with a quick quiz</small></span>
+              <span class="suggestion-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="suggestion-card" type="button" data-prompt="Explain this code line by line in beginner-friendly language: ">
+              <span class="suggestion-icon mint" aria-hidden="true">&lt;/&gt;</span>
+              <span><strong>Explore some code</strong><small>Get a beginner-friendly walkthrough</small></span>
+              <span class="suggestion-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="chat-messages"
+          class="chat-messages"
+          role="log"
+          aria-live="polite"
+          aria-relevant="additions"
+          aria-label="Conversation"
+          hidden
+        ></div>
+
+        <div class="composer-area">
+          <form id="chat-form" class="composer">
+            <label class="visually-hidden" for="message-input">Your study question</label>
+            <textarea
+              id="message-input"
+              name="message"
+              rows="1"
+              maxlength="10000"
+              placeholder="Ask anything about your studies..."
+              required
+            ></textarea>
+            <div class="composer-toolbar">
+              <p class="composer-hint"><span aria-hidden="true">↵</span> Enter to send <span class="hint-divider">·</span> Shift + Enter for a new line</p>
+              <button id="send-button" class="send-button" type="submit" aria-label="Send message">
+                <span class="send-label">Send</span>
+                <span aria-hidden="true">↑</span>
+              </button>
+            </div>
+          </form>
+          <div class="composer-footer">
+            <p id="chat-status" role="status" aria-live="polite">Your AI study partner is ready when you are.</p>
+            <p>AI can make mistakes. Check important information.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
